@@ -1,6 +1,7 @@
 package no.hvl.dat108;
 
 import java.util.LinkedList;
+import java.util.concurrent.Semaphore;
 
 /**
  * A shared buffer for consumers and producers. The item type is int. The buffer
@@ -13,19 +14,27 @@ import java.util.LinkedList;
 public class Buffer {
 
     private final static int SIZE = 10;
-    private LinkedList<Integer> buffer = new LinkedList<Integer>();
+    private LinkedList<Integer> buffer = new LinkedList<>();
+    private Semaphore sem;
 
+    public Buffer() {
+        sem = new Semaphore(0);
+    }
     /**
      * Add a new item to the buffer. If the buffer is full, wait.
      *
      * @param item the new item
      */
     public void add(Integer item) {
-        while (true) {
-            // TODO
-            buffer.add(item);
-            // TODO
-            return;
+        try {
+            while (true) {
+                if (buffer.size() <= 10) {
+                    buffer.add(item);
+                    sem.release();
+                }
+                return;
+            }
+        }catch (Exception e) {
         }
     }
 
@@ -35,11 +44,14 @@ public class Buffer {
      * @return next item
      */
     public Integer remove() {
-        while (true) {
-            // TODO
-            Integer back = buffer.removeFirst();
-            // TODO
-            return back;
+        try {
+            while (true) {
+                sem.acquire();
+                Integer back = buffer.removeFirst();
+                return back;
+            }
+        }catch (Exception e) {
+            return -1;
         }
     }
 
