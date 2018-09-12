@@ -12,8 +12,8 @@ public class Oppg3 {
 
         int fastKroneTillegg = 50;
         double fastProsentTillegg = 5;
-        Function<Ansatt, Integer> bar = x -> (x.getAarslonn() + fastKroneTillegg);
-        a1.endreLonn(x -> (int)(x.getAarslonn() * (1 + fastProsentTillegg / 100 )));
+        Function<Integer, Integer> bar = (x -> x + fastKroneTillegg);
+        a1.endreLonn(x -> (int)(x * (1 + fastProsentTillegg / 100 )));
         a2.endreLonn(bar);
         a3.endreLonn(prosentTileggFunksjon(5));
         System.out.println(a1);
@@ -21,8 +21,9 @@ public class Oppg3 {
         System.out.println(a3);
     }
 
-    public static Function<Ansatt, Integer> prosentTileggFunksjon(double tillegg) {
-        return x -> (int)(x.getAarslonn() * (1 + tillegg / 100 ));
+    public static Function<Integer, Integer> prosentTileggFunksjon(double tillegg) {
+
+        return x -> (int)(x * (1 + tillegg / 100 ));
     }
 
 

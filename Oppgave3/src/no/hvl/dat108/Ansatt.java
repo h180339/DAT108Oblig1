@@ -19,8 +19,8 @@ public class Ansatt {
 		this.aarslonn = aarslonn;
 	}
 
-	public void endreLonn(Function <Ansatt, Integer> foo)  {
-		this.aarslonn = foo.apply(this);
+	public void endreLonn(Function <Integer, Integer> foo)  {
+		this.aarslonn = foo.apply(this.aarslonn);
 	}
 
 		@Override
