@@ -24,12 +24,17 @@ public class Producer extends Thread {
         this.buffer = buffer;
     }
 
+    /**
+     * Runs the producer
+     * Adds items to the buffer when it has space and prints them
+     */
     @Override
     public void run() {
         while (true) {
             Integer item = rand.nextInt(100);
             buffer.add(item);
             System.out.println("Produced: " + item);
+
             try {
                 sleep(50);
             } catch (InterruptedException e) {

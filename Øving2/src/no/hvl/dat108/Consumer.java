@@ -21,11 +21,16 @@ public class Consumer extends Thread {
         this.buffer = buffer;
     }
 
+    /**
+     * Runs the consumer
+     * Removes items when available in the buffer and prints them
+     */
     @Override
     public void run() {
         while (true) {
             Integer item = buffer.remove();
             System.out.println("Consumed: " + item);
+
             try {
                 sleep(50);
             } catch (InterruptedException e) {

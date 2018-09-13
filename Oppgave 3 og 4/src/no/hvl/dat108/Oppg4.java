@@ -7,8 +7,26 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+/**
+ * The main class
+ * @author Gruppe 5
+ * @version 1.0.0 The finalest final version
+ */
 public class Oppg4 {
 
+    /**
+     * make a list of employees, and perform the following actions:
+     * print last name of all employees
+     * print number of female employees
+     * print average of female employees
+     * updates salary of all the bosses and prints the list again
+     * prints true/false depending on if someone is making more than 800.000 kr a year
+     * prints list without using loop
+     *
+     * prints the sum of all numbers in the range [0, 1000] where the number is divisible by 3 or 5
+     *
+     * @param args String arguments to the executable, not used
+     */
     public static void main(String[] args) {
         List<Ansatt> ansatte = Arrays.asList(new Ansatt("Eirik", "Alvestad", "M", "sjef", 1000000),
                         new Ansatt("Orjan", "maBoi", "M", "sjef", 1500),
@@ -29,6 +47,7 @@ public class Oppg4 {
         System.out.println("antall damer: " + damer);
         System.out.println();
 
+        //oppgave c)
         double kvinneLonn = ansatte.stream().filter(x -> x.getKjonn() == "K").mapToInt(x -> x.getAarslonn()).average().getAsDouble();
         System.out.println("Gjennomsnitts lønnen til kvinnene: " + kvinneLonn + " kr");
         System.out.println();
@@ -55,7 +74,7 @@ public class Oppg4 {
         System.out.println();
 
         //oppgave h)
-        int yes = (int)IntStream.range(1, 1001).filter(x -> x % 3 == 0 && x % 5 == 0).count();
+        int yes = (int)IntStream.range(1, 1001).filter(x -> x % 3 == 0 || x % 5 == 0).sum();
         System.out.println(yes);
 
     }
